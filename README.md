@@ -6,7 +6,7 @@ This is my personal customizations to
 ### Installation
 
 * Clone the repo to ~/.zsh:  
-  `git clone git://github.com:babysnakes/oh-my-zsh-customizations.git
+  `git clone git://github.com/babysnakes/oh-my-zsh-customizations.git
 .zsh`
 * Link the zshrc file:  
   `ln -s ~/.zsh/zshrc ~/.zshrc`
