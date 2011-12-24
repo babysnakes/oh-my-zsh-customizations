@@ -10,9 +10,9 @@ This is my personal customizations to
 .zsh`
 * Link the zshrc file:  
   `ln -s ~/.zsh/zshrc ~/.zshrc`
-* Copy the themes/bira-rbenv.zsh-theme file to .oh-my-zsh directory
-  (until they'll support themes from custom directories):  
-  `cp themes/bira-rbenv.zsh-theme ~/.oh-my-zsh/themes/`
+* Copy the custom/themes/bira-rbenv.zsh-theme file to .oh-my-zsh
+  directory (until they'll support themes from custom directories):  
+  `cp custom/themes/bira-rbenv.zsh-theme ~/.oh-my-zsh/themes/`
 
 ### Usage
 
