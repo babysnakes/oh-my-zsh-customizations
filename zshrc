@@ -24,14 +24,14 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow brew rails3 thor powder gem knife bundler)
+plugins=(git git-flow brew rails3 thor powder gem knife bundler runssh)
+
+# use different customization directory
+ZSH_CUSTOM=$HOME/.zsh/custom
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-
-# use different customization directory
-ZSH_CUSTOM=$HOME/.zsh/custom
 
 # path fixes
 export PATH=${HOME}/usr/bin:${HOME}/Library/Python/2.7/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}
