@@ -24,7 +24,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow brew rails3 thor powder gem knife bundler runssh)
+plugins=(git git-flow brew rails3 thor powder gem knife bundler rake runssh)
 
 # use different customization directory
 ZSH_CUSTOM=$HOME/.zsh/custom
