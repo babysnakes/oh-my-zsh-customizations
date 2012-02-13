@@ -41,7 +41,7 @@ export MANPATH=/opt/homebrew/share/man:$MANPATH
 eval "$(rbenv init -)"
 
 # editor
-export EDITOR='vim'
+export EDITOR='emacsclient -a "" -t'
 
 # for the reset_path function
 export ORIGINAL_PATH=${PATH}
