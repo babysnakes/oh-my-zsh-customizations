@@ -3,80 +3,101 @@
 local curcontext="$curcontext" state line _gems _opts ret=1
 
 _arguments -C -A "-v" -A "--version" \
-	'(- 1 *)'{-v,--version}'[display version information]' \
-	'1: :->cmds' \
-	'*:: :->args' && ret=0
+    '(- 1 *)'{-v,--version}'[display version information]' \
+    '(--no-color)--no-color[Prints all output without color]' \
+    '(--verbose)--verbose[Prints out additional logging information]' \
+    '1: :->cmds' \
+    '*:: :->args' && ret=0
 
 case $state in
-	cmds)
-		_values "bundle command" \
-			"install[Install the gems specified by the Gemfile or Gemfile.lock]" \
-			"update[Update dependencies to their latest versions]" \
-			"package[Package the .gem files required by your application]" \
-			"exec[Execute a script in the context of the current bundle]" \
-			"config[Specify and read configuration options for bundler]" \
-			"check[Determine whether the requirements for your application are installed]" \
-			"list[Show all of the gems in the current bundle]" \
-			"show[Show the source location of a particular gem in the bundle]" \
-			"console[Start an IRB session in the context of the current bundle]" \
-			"open[Open an installed gem in the editor]" \
-			"viz[Generate a visual representation of your dependencies]" \
-			"init[Generate a simple Gemfile, placed in the current directory]" \
-			"gem[Create a simple gem, suitable for development with bundler]" \
-			"help[Describe available tasks or one specific task]"
-		ret=0
-		;;
-	args)
-		case $line[1] in
-			help)
-				_values 'commands' \
-                    'install' \
-                    'update' \
-                    'package' \
-                    'exec' \
-                    'config' \
-                    'check' \
-                    'list' \
-                    'show' \
-                    'console' \
-                    'open' \
-                    'viz' \
-                    'init' \
-                    'gem' \
-                    'help' && ret=0
-				;;
-			install)
-				_arguments \
-					'(--no-color)--no-color[disable colorization in output]' \
-					'(--local)--local[do not attempt to connect to rubygems.org]' \
-					'(--quiet)--quiet[only output warnings and errors]' \
-					'(--gemfile)--gemfile=-[use the specified gemfile instead of Gemfile]:gemfile' \
-					'(--system)--system[install to the system location]' \
-					'(--deployment)--deployment[install using defaults tuned for deployment environments]' \
-					'(--frozen)--frozen[do not allow the Gemfile.lock to be updated after this install]' \
-					'(--path)--path=-[specify a different path than the system default]:path:_files' \
-					'(--binstubs)--binstubs=-[generate bin stubs for bundled gems to ./bin]:directory:_files' \
-					'(--without)--without=-[exclude gems that are part of the specified named group]:groups'
-				ret=0
-				;;
-			exec)
-				_normal && ret=0
-				;;
-			(open|show)
-				_gems=( $(bundle show 2> /dev/null | sed -e '/^  \*/!d; s/^  \* \([^ ]*\) .*/\1/') )
-				if [[ $_gems != "" ]]; then
-					_values 'gems' $_gems && ret=0
-				fi
-				;;
-			*)
-				_opts=(  $(bundle help $line[1] | sed -e '/^  \[-/!d; s/^  \[\(-[^=]*\)=.*/\1/') )
-				_opts+=( $(bundle help $line[1] | sed -e '/^  -/!d; s/^  \(-.\), \[\(-[^=]*\)=.*/\1 \2/') )
-				if [[ $_opts != "" ]]; then
-					_values 'options' $_opts && ret=0
-				fi
-				;;
-		esac
-		;;
+    cmds)
+        _values "bundle command" \
+            "install[Install the gems specified by the Gemfile or Gemfile.lock]" \
+            "update[Update dependencies to their latest versions]" \
+            "package[Package the .gem files required by your application into the vendor/cache directory]" \
+            "exec[Execute a script in the context of the current bundle]" \
+            "config[Specify and read configuration options for bundler]" \
+            "check[Determine whether the requirements for your application are installed and available to bundler]" \
+            "list[Show all of the gems in the current bundle]" \
+            "show[Show the source location of a particular gem in the bundle]" \
+            "outdated[Show all of the outdated gems in the current bundle]" \
+            "console[Start an IRB session in the context of the current bundle]" \
+            "open[Open an installed gem in the editor]" \
+            "viz[Generate a visual representation of your dependencies]" \
+            "init[Generate a simple Gemfile, placed in the current directory]" \
+            "gem[Create a simple gem, suitable for development with bundler]" \
+            "help[Describe available tasks or one specific task]"
+        ret=0
+        ;;
+    args)
+        case $line[1] in
+            help)
+                _values 'commands' 'install update package exec config check list show outdated console open viz init gem help' && ret=0
+                ;;
+            install)
+                _arguments \
+                    '(--gemfile)--gemfile=-[The location of the Gemfile(5) that bundler should use]:gemfile:_files' \
+                    '(--path)--path=-[The location to install the gems in the bundle to]:path:_files' \
+                    '(--system)--system[Installs the gems in the bundle to the system location]' \
+                    '(--without)--without=-[A space-separated list of groups to skip installing]:groups' \
+                    '(--local)--local[Do not attempt to connect to rubygems.org]' \
+                    "(--deployment)--deployment[Switches bundler's defaults into deployment mode]" \
+                    '(--binstubs)--binstubs=-[Create a directory containing an executable that runs in the context of the bundle]:binstubs' \
+                    '(--shebang)--shebang+[Uses the ruby executable provided to execute the scripts created with --binstubs]:shebang' \
+                    '(--standalone)--standalone=-[Make a bundle that can work without Ruby Gems or Bundler at run-time]:standalone'
+                ret=0
+                ;;
+            update)
+                _arguments '(--source)--source=-[The name of a :git or :path source used in the Gemfile]'
+                ret=0
+                ;;
+            check)
+                _arguments \
+                    '(--gemfile)--gemfile=-[Use the specified gemfile instead of Gemfile]:gemfile:_files' \
+                    '(--path)--path=-[Specify a different path than the system default]:path:_files'
+                ret=0
+                ;;
+            exec)
+                _normal && ret=0
+                ;;
+            list)
+                _arguments '(--paths)--paths=-[List the paths of all gems that are required by your Gemfile]:paths:_files'
+                ret=0
+                ;;
+            (show|open)
+                _gems=( $(bundle show 2> /dev/null | sed -e '/^  \*/!d; s/^  \* \([^ ]*\) .*/\1/') )
+                if [[ $_gems != "" ]]; then
+                    _values 'gems' $_gems && ret=0
+                fi
+                ;;
+            outdated)
+                _arguments \
+                    '(--pre)--pre=-[Check for newer pre-release gems]' \
+                    '(--source)--source=-[Check against a specific source]' \
+                    '(--local)--local=-[Do not attempt to fetch gems remotely and use the gem cache instead]'
+                ;;
+            viz)
+                _arguments \
+                    '(-f|--file)'{-f,--file=}'[The name to use for the generated file]:file' \
+                    '(-v|--version)'{-v,--version=}'[Set to show each gem version]:version' \
+                    '(-r|--requirements)'{-r,--requirements=}'[Set to show the version of each required dependency]:requirements' \
+                    '(-F|--format)'{-F,--format=}'[This is output format option]:format'
+                ;;
+            init)
+                _arguments '(--gemspec)--gemspec=-[Use the specified .gemspec to create the Gemfile]'
+                ;;
+            gem)
+                _arguments '(-b|--bin)'{-b,--bin=}'-[Generate a binary for your library]'
+                ;;
+            *)
+                _opts=(  $(bundle help $line[1] | sed -e '/^  \[-/!d; s/^  \[\(-[^=]*\)=.*/\1/') )
+                _opts+=( $(bundle help $line[1] | sed -e '/^  -/!d; s/^  \(-.\), \[\(-[^=]*\)=.*/\1 \2/') )
+                if [[ $_opts != "" ]]; then
+                    _values 'options' $_opts && ret=0
+                fi
+                ;;
+        esac
+        ;;
 esac
 
 return ret
