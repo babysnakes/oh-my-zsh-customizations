@@ -1,5 +1,5 @@
 # a shortcut for elements to $PATH
-function add_to_path {
+function add-to-path {
   if [ -z $1 ]; then
     echo "Usage: add_to_path DIR"
     return 1
