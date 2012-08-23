@@ -5,7 +5,9 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bira"
+#ZSH_THEME="bira-rbenv"
+ZSH_THEME="arrow"
+
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -38,14 +40,20 @@ export PATH=${HOME}/usr/bin:${HOME}/Library/Python/2.7/bin:/opt/homebrew/bin:/op
 export MANPATH=/opt/homebrew/share/man:$MANPATH
 
 # rbenv
-eval "$(rbenv init -)"
+# export PATH=${HOME}/.rbenv/bin:${PATH}
+# eval "$(rbenv init -)"
 
 # editor
 export EDITOR='emacsclient -a "" -t'
 
-# for the reset_path function
+# for the reset-path function
 export ORIGINAL_PATH=${PATH}
 
 # for ec2 tools
 export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
-export EC2_HOME="/opt/homebrew/Cellar/ec2-api-tools/1.5.0.1/jars"
+export ORIGINAL_MANPATH=${MANPATH}
+
+# selecting user via usepackage
+alias r18='reset-path; use ruby-187'
+alias r19='reset-path; use ruby-193'
+use ruby-187

@@ -11,11 +11,13 @@ function add-to-path {
 
 # reset the path to the original $PATH
 # You need to define $ORIGINAL_PATH at the end of your zshrc.
-function reset_path {
+function reset-path {
   if [ -z ${ORIGINAL_PATH} ]; then
     echo "No ORIGINAL_PATH variable exists. Not resetting!"
     return 1
   else
     export PATH=${ORIGINAL_PATH}
   fi
+
+  export MANPATH=${ORIGINAL_MANPATH}
 }
