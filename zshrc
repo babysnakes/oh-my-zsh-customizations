@@ -36,7 +36,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 # path fixes
-export PATH=${HOME}/usr/bin:${HOME}/Library/Python/2.7/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}
+export PATH=${HOME}/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/share/python:${PATH}
 export MANPATH=/opt/homebrew/share/man:$MANPATH
 
 # rbenv
