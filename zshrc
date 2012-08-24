@@ -56,4 +56,5 @@ export ORIGINAL_MANPATH=${MANPATH}
 # selecting user via usepackage
 alias r18='reset-path; use ruby-187'
 alias r19='reset-path; use ruby-193'
-use ruby-187
+alias R='ruby -v'
+use ruby-193
