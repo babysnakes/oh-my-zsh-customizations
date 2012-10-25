@@ -22,7 +22,7 @@ ZSH_THEME="arrow"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -39,19 +39,14 @@ source $ZSH/oh-my-zsh.sh
 export PATH=${HOME}/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/share/python:${PATH}
 export MANPATH=/opt/homebrew/share/man:$MANPATH
 
-# rbenv
-# export PATH=${HOME}/.rbenv/bin:${PATH}
-# eval "$(rbenv init -)"
-
-# editor
-export EDITOR='emacsclient -a "" -t'
-
 # for the reset-path function
 export ORIGINAL_PATH=${PATH}
-
-# for ec2 tools
-export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
 export ORIGINAL_MANPATH=${MANPATH}
+
+# editor
+export EDITOR='emacsclient -a "" -c'
+alias edit="$EDITOR"
+alias emacsnw='emacs -nw'
 
 # selecting user via usepackage
 alias r18='reset-path; use ruby-187'
