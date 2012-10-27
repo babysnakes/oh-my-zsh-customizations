@@ -2,5 +2,5 @@
 
 _use() {
        _values "Available Packages" \
-               $(use -l 2>&1 | grep "^\s\+\w"|cut -d "-" -f 1|tr -d ' ')
+               $(use -l 2>&1 | grep "^\s\+\w"| awk '{print $1}')
 }
