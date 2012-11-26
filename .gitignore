@@ -1,0 +1,3 @@
+# To create temporary customization file without putting it in the
+# repo, call it tmp-<something>.zsh
+/custom/tmp-*
