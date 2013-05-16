@@ -48,8 +48,9 @@ export EDITOR='emacsclient -a ""'
 alias edit="$EDITOR"
 alias emacsnw='emacs -nw'
 
-# selecting user via usepackage
-alias r18='reset-path; use ruby-187'
-alias r19='reset-path; use ruby-193'
+# selecting user via chruby
+if [ -e /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]; then
+    source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+    chruby ruby-1.9.3
+fi
 alias R='ruby -v'
-use ruby-193
