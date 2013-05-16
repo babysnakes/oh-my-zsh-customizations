@@ -4,7 +4,7 @@ function add-to-path {
     echo "Usage: add_to_path DIR"
     return 1
   else
-    PATH_TO_ADD=$(ruby -e "print File.expand_path(\"$1\")")
+    PATH_TO_ADD=$(echo "$1"(:A))
     eval "export PATH=${PATH_TO_ADD}:${PATH}"
   fi
 }
