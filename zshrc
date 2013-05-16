@@ -54,3 +54,9 @@ if [ -e /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]; then
     chruby ruby-1.9.3
 fi
 alias R='ruby -v'
+
+# comns-gitolite
+alias comnsgit='ssh git@gitsrv.comns.net'
+
+# tmuxinator
+ [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
