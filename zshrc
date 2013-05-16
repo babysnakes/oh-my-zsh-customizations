@@ -44,7 +44,7 @@ export ORIGINAL_PATH=${PATH}
 export ORIGINAL_MANPATH=${MANPATH}
 
 # editor
-export EDITOR='emacsclient -a "" -c'
+export EDITOR='emacsclient -a ""'
 alias edit="$EDITOR"
 alias emacsnw='emacs -nw'
 
